@@ -1,0 +1,30 @@
+# Variablen für Backbone-Server
+
+ffms_routing:
+  net: 2a03:2260:300c::/48
+  domaenen:
+  - group_name: domaene-01
+    v6_net: 2a03:2260:300c:100::/64
+  - group_name: domaene-02
+    v6_net: 2a03:2260:300c:200::/64
+  - group_name: domaene-03
+    v6_net: 2a03:2260:300c:300::/64
+  - group_name: domaene-04
+    v6_net: 2a03:2260:300c:400::/64
+  - group_name: domaene-05
+    v6_net: 2a03:2260:300c:500::/64
+
+  
+# Collectd Konfiguration 
+collectd:
+  collect_dhcp: false
+  collect_fastd: false
+  collect_l2tp: false
+  collect_ipv4ipv6: true
+  collect_sysctl: true
+
+administratorenteam:
+  - "rene"
+  - "tom"
+  - "jay"
+  - "mpw"

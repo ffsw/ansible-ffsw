@@ -1,0 +1,34 @@
+# Allgemeine Infrastruktur-Server 
+[common]
+
+# Service-VM für Zentrale Dienste (Karte, Statistik)  
+[services]
+services ansible_ssh_host=136.243.106.58 ansible_ssh_port=3922
+
+# Backbone Server 
+[backbone]
+
+
+[backbone-legacy]
+
+
+# Supernode Server 
+[supernodes]
+
+
+# Domänen
+[domaene-01]
+
+
+[gateways]
+# Gateways mit oder ohne Direktanbindung FFRL
+# Immer mit Multidomänen-L2TP
+gw04 ansible_ssh_host=176.9.47.18 ansible_ssh_port=3922 # Direktanbindung FFRL
+gw05 ansible_ssh_host=178.63.78.115 ansible_ssh_port=3922  # Direktanbindung FFRL
+gw06 ansible_ssh_host=136.243.106.61 ansible_ssh_port=3922  # Direktanbindung FFRL
+
+# Sonstige Server
+[firmware]
+
+
+

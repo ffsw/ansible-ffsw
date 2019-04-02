@@ -1,0 +1,74 @@
+# Variablen für Gateway-Server mit Direktanbindung zum FFRL parad0x.gw.freifunk-muenster.de
+# Die Server-IP-Adresse wird durch von ansible bereitgestellte Variablen abgerufen (ansible_eth0.ipv4...)
+
+# ID des Servers. 
+# Hieraus wird die IP-Adresse innerhalb des Freifunk Netzwerkes gebildet.
+vm_id: 4
+server_id: 4
+server_besitzer: "Rene"
+
+# IPv4 Adresse auf die der Datenverkehr per NAT umgestezt wird
+# Nur für Backbone-Server notwendig  
+server_ipv4_nat: 185.66.193.31/32
+    
+# GRE-Einstellungen zum Freifunk Rheinland
+# Bei v6 ist die ...::1 remote und die ...::2 lokal
+ffrl_tun:
+- name: dus_a
+  gre_target: 185.66.193.0
+  v4_local: 100.64.9.219/31
+  v4_remote: 100.64.9.218/31
+  v6_local: 2a03:2260:0:502::2/64
+  v6_remote: 2a03:2260:0:502::1/64
+- name: dus_b
+  gre_target: 185.66.193.1
+  v4_local: 100.64.9.225/31
+  v4_remote: 100.64.9.224/31
+  v6_local: 2a03:2260:0:505::2/64
+  v6_remote: 2a03:2260:0:505::1/64
+- name: ber_a
+  gre_target: 185.66.195.0
+  v4_local: 100.64.9.215/31
+  v4_remote: 100.64.9.214/31
+  v6_local: 2a03:2260:0:500::2/64
+  v6_remote: 2a03:2260:0:500::1/64
+- name: ber_b
+  gre_target: 185.66.195.1
+  v4_local: 100.64.9.221/31
+  v4_remote: 100.64.9.220/31
+  v6_local: 2a03:2260:0:503::2/64
+  v6_remote: 2a03:2260:0:503::1/64
+- name: fra_a
+  gre_target: 185.66.194.0
+  v4_local: 100.64.9.217/31
+  v4_remote: 100.64.9.216/31
+  v6_local: 2a03:2260:0:501::2/64
+  v6_remote: 2a03:2260:0:501::1/64
+- name: fra_b
+  gre_target: 185.66.194.1
+  v4_local: 100.64.9.223/31
+  v4_remote: 100.64.9.222/31
+  v6_local: 2a03:2260:0:504::2/64
+  v6_remote: 2a03:2260:0:504::1/64
+
+domaenenliste:
+   "01":
+      dhcp_start: 10.210.20.26
+      dhcp_ende: 10.210.23.254
+      server_id: 4
+   "02":
+      dhcp_start: 10.210.36.26
+      dhcp_ende: 10.210.39.254
+      server_id: 4
+   "03":
+      dhcp_start: 10.210.52.26
+      dhcp_ende: 10.210.55.254
+      server_id: 4
+   "04":
+      dhcp_start: 10.210.68.26
+      dhcp_ende: 10.210.71.254
+      server_id: 4
+   "05":
+      dhcp_start: 10.210.84.26
+      dhcp_ende: 10.210.87.255
+      server_id: 4

@@ -1,0 +1,86 @@
+---
+# Allgemeine Konfigurationen für alle Server
+
+- name: create motd file
+  template: src=motd.j2 dest=/etc/motd
+
+- name: Enable syntax highlighting in vim by default
+  lineinfile: 
+    dest=~/.vimrc
+    regexp='^syntax '
+    line='syntax on'
+    owner=root
+    group=root
+    mode=0644
+    create=yes
+
+- name: Update .bash_profile file
+  template: src=bash_profile.j2 dest=~/.bash_profile
+
+- name: add default repo
+  #Freifunk- und Rollen-Repos erst in den jeweiligen Rollen
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "deb http://ftp.de.debian.org/debian/ {{ ansible_distribution_release }} main"
+    - "deb http://ftp.de.debian.org/debian/ {{ ansible_distribution_release }}-updates main"
+    - "deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main"
+  when: ansible_distribution == "Debian"
+
+- name: Eventuelles CDROM-Repo von der Installation entfernen
+  lineinfile: dest=/etc/apt/sources.list state=absent regexp='cdrom'
+
+- name: install common packages
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    state: installed
+  with_items:
+    - vim
+    - wget
+    - vnstat
+    - tmux
+    - pastebinit
+    - htop
+    - jnettop
+    - iotop
+    - tcpdump
+    - screen
+    - strace
+    - socat
+    - dnsutils
+    - host
+    - apt-transport-https
+    - tshark
+    - dwdiff
+    - molly-guard
+    - git
+    - iperf
+    - chkconfig
+    - logwatch
+    - mtr-tiny
+    - dhcpdump
+    - dhcping
+
+- name: uninstall unneeded packages
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    state: absent
+  with_items:
+    - rpcbind
+
+- name: SSH-Schlüsseldatei generieren
+  template: src=authorized_keys.j2 dest=/root/.ssh/authorized_keys
+  when: administratorenteam is defined
+
+- name: SSH-Dämon Passwortanmeldung abschalten
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^[#]?PasswordAuthentication line="PasswordAuthentication no"
+  notify: reload ssh
+
+- locale_gen: name=de_DE.UTF-8 state=present
+
+- name: Logs drei Tage aufbewahren, täglich rotieren
+  template: src=logrotate.conf.j2 dest=/etc/logrotate.conf
+  when: logrotate is defined

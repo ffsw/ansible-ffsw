@@ -1,0 +1,14 @@
+vm_id: 11
+server_id: 11
+server_besitzer: "Rene"
+
+bind:
+  ffms_zone_type: master
+  ns_name: ns01
+  ffms_for_groups:
+    - domaene-01
+    - domaene-02
+    - domaene-03
+    - domaene-04
+    - domaene-05
+#legacy_domain: yes

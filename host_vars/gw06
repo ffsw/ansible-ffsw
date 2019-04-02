@@ -1,0 +1,62 @@
+# Variablen für Gateway-Server mit Direktanbindung zum FFRL parad0x.gw.freifunk-muenster.de
+# Die Server-IP-Adresse wird durch von ansible bereitgestellte Variablen abgerufen (ansible_eth0.ipv4...)
+
+# ID des Servers. 
+# Hieraus wird die IP-Adresse innerhalb des Freifunk Netzwerkes gebildet.
+vm_id: 6
+server_id: 6
+server_besitzer: "Rene"
+
+# IPv4 Adresse auf die der Datenverkehr per NAT umgestezt wird
+# Nur für Backbone-Server notwendig  
+server_ipv4_nat: 185.66.195.74/32
+    
+# GRE-Einstellungen zum Freifunk Rheinland
+# Bei v6 ist die ...::1 remote und die ...::2 lokal
+ffrl_tun:
+- name: dus_a
+  gre_target: 185.66.193.0
+  v4_local: 100.64.3.225/31
+  v4_remote: 100.64.3.224/31
+  v6_local: 2a03:2260:0:1fa::2/64
+  v6_remote: 2a03:2260:0:1fa::1/64
+- name: dus_b
+  gre_target: 185.66.193.1
+  v4_local: 100.64.3.229/31
+  v4_remote: 100.64.3.228/31
+  v6_local: 2a03:2260:0:1fc::2/64
+  v6_remote: 2a03:2260:0:1fc::1/64
+- name: ber_a
+  gre_target: 185.66.195.0
+  v4_local: 100.64.3.223/31
+  v4_remote: 100.64.3.222/31
+  v6_local: 2a03:2260:0:1f9::2/64
+  v6_remote: 2a03:2260:0:1f9::1/64
+- name: ber_b
+  gre_target: 185.66.195.1
+  v4_local: 100.64.3.227/31
+  v4_remote: 100.64.3.226/31
+  v6_local: 2a03:2260:0:1fb::2/64
+  v6_remote: 2a03:2260:0:1fb::1/64
+
+domaenenliste:
+   "01":
+      dhcp_start: 10.210.24.26
+      dhcp_ende: 10.210.27.254
+      server_id: 6
+   "02":
+      dhcp_start: 10.210.40.26
+      dhcp_ende: 10.210.43.254
+      server_id: 6
+   "03":
+      dhcp_start: 10.210.56.26
+      dhcp_ende: 10.210.59.254
+      server_id: 6
+   "04":
+      dhcp_start: 10.210.72.26
+      dhcp_ende: 10.210.75.254
+      server_id: 6
+   "05":
+      dhcp_start: 10.210.88.26
+      dhcp_ende: 10.210.91.255
+      server_id: 6

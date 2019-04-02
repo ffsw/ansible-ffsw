@@ -1,0 +1,8 @@
+---
+# Hauptdatei, includiert lediglich die einzelnen Playbooks 
+- include: all.yml
+- include: backbone.yml
+- include: services.yml
+- include: supernodes.yml
+
+
