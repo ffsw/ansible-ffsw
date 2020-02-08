@@ -27,6 +27,9 @@ gw04 ansible_ssh_host=176.9.47.18 ansible_ssh_port=3922 # Direktanbindung FFRL
 gw05 ansible_ssh_host=178.63.78.115 ansible_ssh_port=3922  # Direktanbindung FFRL
 gw06 ansible_ssh_host=136.243.106.61 ansible_ssh_port=3922  # Direktanbindung FFRL
 
+[gateways_direkt]
+gw07 ansible_ssh_host=5.9.13.219 ansible_ssh_port=3922 # Ausleitung am GW
+
 # Sonstige Server
 [firmware]
 
